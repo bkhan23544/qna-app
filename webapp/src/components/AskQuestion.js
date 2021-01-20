@@ -129,7 +129,6 @@ export default function AskQuestion(props){
             })
             .then(function (response) {
               // handle success
-              console.log(response.data.paragraph)
               var question = state.question
               var paragraph = response.data.paragraph
               getAnswers(paragraph,question)  

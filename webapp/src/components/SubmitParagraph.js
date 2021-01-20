@@ -49,7 +49,6 @@ const handleSubmit=()=>{
     })
     .then(function (response) {
       // handle success
-      console.log(response);
       alert.show("Paragraph Submitted")
       setState({...state,paragraph:"",title:""})
     })
