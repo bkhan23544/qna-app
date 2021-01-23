@@ -18,9 +18,11 @@ import PublishIcon from '@material-ui/icons/Publish';
 import AskQuestion from './components/AskQuestion'
 import SubmitParagraph from './components/SubmitParagraph'
 import Paragraphs from './components/Paragraphs'
+import Questions from './components/Questions'
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-mui'
 import { ListItemIcon } from '@material-ui/core';
+import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import DescriptionIcon from '@material-ui/icons/Description';
 import * as qna from '@tensorflow-models/qna';
 import * as tf from '@tensorflow/tfjs-core'
@@ -112,12 +114,17 @@ const MyDrawer = withStyles(styles)(
           <ListItemIcon><DescriptionIcon/></ListItemIcon>
           <ListItemText>Paragraphs</ListItemText>
         </ListItem>
+        <ListItem button component={Link} to="/Questions" onClick={onItemClick('Questions')}>
+          <ListItemIcon><LiveHelpIcon/></ListItemIcon>
+          <ListItemText>Questions</ListItemText>
+        </ListItem>
       </List>
     </Drawer>
     <main className={classes.content}>
         <Route exact path="/"><AskQuestion loading={loading} model={model}/></Route>
         <Route path="/SubmitParagraph" component={SubmitParagraph} />
         <Route path="/Paragraphs" component={Paragraphs} />
+        <Route path="/Questions" component={Questions} />
     </main>
     </Router>
   )

@@ -22,6 +22,30 @@ app.post('/getparagraphs',function (req,res){
   res.send(paragraphsToSend)
 })
 
+app.post('/getquestions',function (req,res){
+  var questions = require('./questions.json')
+  res.send(questions)
+})
+
+app.post('/addvariant',function (req,res){
+  fs.readFile('questions.json', 'utf8', function readFileCallback(err, data){
+    if (err){
+        console.log(err);
+    } else {
+    obj = JSON.parse(data);
+    var stringObj = []
+    for(var i=0;i<obj.length;i++){
+      stringObj.push(JSON.stringify(obj[i]))
+    }
+    var index = stringObj.indexOf(JSON.stringify(req.body.question))
+    obj[index].question.push(req.body.variant)
+    json = JSON.stringify(obj,null,2); //convert it back to json
+    fs.writeFileSync('questions.json', json); // write it back 
+    
+}});
+res.send("success")
+})
+
 app.post('/savequestion', function (req,res){
   fs.readFile('questions.json', 'utf8', function readFileCallback(err, data){
     if (err){
@@ -36,7 +60,7 @@ res.send(req.body)
 })
 
 app.post('/checkquestion',function (req,res){
-  var question = req.body.question
+  var question = req.body.question.toLowerCase()
   const allQuestions = require('./questions.json')
   const sentenceMatchingPercent = require('./config.json')
   var questions=[]
@@ -45,19 +69,33 @@ app.post('/checkquestion',function (req,res){
     questions.push(v.question)
     })   
 
-  for(var i=0;i<questions.length;i++){
-    var percentage = SimilarityPercentage(questions[i].split(" "), question.split(" "));
-    percentages.push(percentage)
-  }
+  
 
-  var max = percentages.indexOf(Math.max(...percentages));
-  if(Math.max(...percentages)>sentenceMatchingPercent.sentenceMatchingPercent){
+  for(var i=0;i<questions.length;i++){
+    percentages.push([])
+    for(var j=0;j<questions[i].length;j++){
+    var percentage = SimilarityPercentage(questions[i][j].split(" "), question.split(" "));
+    console.log(percentage,"percentage of q")
+    percentages[i].push(percentage)
+    console.log(percentages,"percentage of all")
+  }
+  }
+  var maxInVariants=[]
+
+  for(var i=0;i<percentages.length;i++){
+    var max = Math.max(...percentages[i])
+    maxInVariants.push(max)
+    console.log(maxInVariants,"maxInVariants")
+  }
+  var max = maxInVariants.indexOf(Math.max(...maxInVariants));
+  if(Math.max(...maxInVariants)>sentenceMatchingPercent.sentenceMatchingPercent){
     res.send({answer:allQuestions[max].answer})
   }
   else{
     res.send("not found")
   }
-  console.log(percentages,"percentages of questions")
+
+  // res.send("not found")
   
 })
 
@@ -107,7 +145,7 @@ var percentages=[]
    for(var i=0;i<keywords.length;i++){
     var percentage = SimilarityPercentage(keywords[i],arrayB)
     percentages.push(percentage)
-    console.log("percentage "+i+":"+percentage)
+    // console.log("percentage "+i+":"+percentage)
    }
 
    var max = percentages.indexOf(Math.max(...percentages));

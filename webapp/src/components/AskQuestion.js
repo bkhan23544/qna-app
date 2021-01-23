@@ -93,7 +93,7 @@ export default function AskQuestion(props){
 
     const handleSatisfied=()=>{
       axios.post('http://localhost:5000/savequestion',{
-        question:state.question,
+        question:[state.question.toLowerCase()],
         answer:answer
       })
       .then(function (response){
@@ -104,6 +104,7 @@ export default function AskQuestion(props){
 
     const handleChange=(e)=>{
         setState({...state,[e.target.name]:e.target.value})
+        setAnswer("")
         }
 
     const handleSubmit=()=>{
