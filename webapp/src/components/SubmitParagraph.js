@@ -49,7 +49,7 @@ const handleSubmit=()=>{
     })
     .then(function (response) {
       // handle success
-      alert.show("Paragraph Submitted")
+      alert.show("Submission Successful")
       setState({...state,paragraph:"",title:""})
     })
     .catch(function (error) {
@@ -72,10 +72,10 @@ const handleSubmit=()=>{
             <Paper elevation={3} className={classes.paddingPaper}>
                 <Typography variant="h4">Submit Paragraph</Typography>
                    <div className={classes.input}>
-      <TextField value={state.title} id="outlined-basic" label="Enter Title" variant="outlined" name="title" onChange={handleChange}/>
+      <TextField value={state.title} id="outlined-basic" label="Title" variant="outlined" name="title" onChange={handleChange}/>
     </div>
     <div className={classes.input}>
-    <TextField value={state.paragraph} rows={15} multiline={true} id="outlined-basic" label="Enter Paragraph" name="paragraph" variant="outlined" onChange={handleChange}/>
+    <TextField value={state.paragraph} rows={15} multiline={true} id="outlined-basic" label="Paragraph" name="paragraph" variant="outlined" onChange={handleChange}/>
     </div>
     <Button style={{marginTop:"10px"}} fullWidth variant="contained" onClick={handleSubmit} color="primary">Submit</Button>
     </Paper>

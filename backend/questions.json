@@ -1,16 +1,38 @@
 [
   {
     "question": [
-      "who founded huawei?",
-      "who is the founder of huawei?"
+      "what is the long march 8?"
     ],
-    "answer": "Ren Zhengfei"
+    "answer": "a 356-ton Chinese made medium-lift rocket"
   },
   {
     "question": [
-      "who plays barry allen?",
-      "what actor plays barry allen?"
+      "when was the first successful launch of the long march 8?"
     ],
-    "answer": "Grant Gustin"
+    "answer": "December 22, 2020"
+  },
+  {
+    "question": [
+      "who was mohsen fakhrizadeh?"
+    ],
+    "answer": "senior Iranian nuclear scientist"
+  },
+  {
+    "question": [
+      "how old was mohsen fakhrizadeh when he died?"
+    ],
+    "answer": "63"
+  },
+  {
+    "question": [
+      "what is kumsong-3?"
+    ],
+    "answer": "a North Korean anti-ship missile"
+  },
+  {
+    "question": [
+      "how far can the kumsong-3 travel?"
+    ],
+    "answer": "240 kilometers"
   }
 ]

@@ -173,9 +173,8 @@ export default function AskQuestion(props){
          {answer!=="No Answer" ? <p style={{fontSize:"20px"}}><b>Answer: </b>{answer}</p> :
          <p style={{fontSize:"20px"}}><b>No Answer</b></p>}
          {satisfied && <div>
-         <p>Are You Satisfied with the answer?</p>
-         <Button style={{margin:"10px"}} variant="contained" color="primary" onClick={handleSatisfied}>Yes</Button>
-         <Button variant="contained" color="primary" onClick={()=>setSatisfied(false)}>No</Button>
+         <Button style={{margin:"10px"}} variant="contained" color="primary" onClick={handleSatisfied}>OK</Button>
+         <Button variant="contained" color="primary" onClick={()=>setSatisfied(false)}>Try Again</Button>
          </div>}
          </Paper>}
          </div>
